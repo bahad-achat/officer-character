@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&display=swap");
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  background-color: #c9b6e3;
+  color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  .header {
+    background-color: #5f3594;
+    color: white;
+  }
+}
+
+.mantine-Switch-track {
+  cursor: pointer !important;
+}
+
+.ProseMirror p.is-editor-empty:first-of-type::before {
+  float: right !important;
+}
+
+.mantine-RichTextEditor-content {
+  min-height: 100px;
+}
+
+.header-logo {
+  animation: fade-up;
+  animation-duration: 600ms;
+}
+
+@keyframes fade-up {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.mantine-RichTextEditor-content table td {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #666666;
+}
+
+.mantine-RichTextEditor-content table {
+  table-layout: fixed;
+}
