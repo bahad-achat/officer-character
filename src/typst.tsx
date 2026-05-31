@@ -233,7 +233,7 @@ export interface TemplateInfo {
   buttons?: TemplateButton[]
 }
 
-export const TEMPLATE_GROUPS = ["כללי", "צה״לי", "בה״די"]
+export const TEMPLATE_GROUPS = ["כללי", "צה״לי", "בה״די", "בה״די - אלון"]
 export const TEMPLATES: Record<string, TemplateInfo> = {
   work: {
     group: "כללי",
@@ -2040,6 +2040,149 @@ export const TEMPLATES: Record<string, TemplateInfo> = {
       },
     ],
   },
+  "alon-plan-command": {
+    group: "בה״די - אלון",
+    name: "אישור תוכניות - פיקודי",
+    color: "blue",
+    parameters: [
+      { name: "role", label: "מה התפקיד שקיבלת?" },
+      { name: "duration", label: "מהו משך ההתנסות?", tutorial: "יום/שבוע/חצי קורס/ כלל הקורס" },
+      { name: "main-mission", label: "כיצד תגדיר/י את משימותיך העיקריות בהתנסות?", lines: 3 },
+      { name: "success", label: "מה תגדיר/י כהצלחה במשימה?", lines: 2 },
+      { name: "tutor-highlights", label: "על אילו נקודות היית רוצה שהחונך ישים דגש?", lines: 2 },
+      { name: "why", label: "למה לדעתך קיבלת את ההתנסות?", lines: 2 },
+      {
+        name: "targets",
+        label: "יעדים למשימה (3 לפחות)",
+        variadic: true,
+        children: [
+          { name: "target", label: "יעד" },
+          { name: "challenges", label: "אתגרים שאני צופה בעמידה ביעד" },
+          { name: "how-to-handle", label: "איך אתמודד עם האתגרים הצפויים" },
+          { name: "metrics", label: "מדדים להצלחה" }
+        ]
+      },
+      { name: "team-state", label: "מה מצב הצוות/הפלוגה בנקודת זמן זו?", lines: 2 },
+      { 
+        name: "leadership-concept", 
+        label: "כיצד תפיסת הפיקוד שלך תבוא לידי ביטוי בהתנסות?", 
+        lines: 3,
+        tutorial: "ציין/י התייחסות לכל אחד מהסעיפים הבאים: 1) ערכים. 2) ציפיות מהצוות. 3) ציפיות מעצמך. 4) קווים אדומים."
+      },
+      { name: "followers-management", label: "איך בכוונתך להתנהל מול הפקודים?", lines: 2, tutorial: "הנעתם ליעד, התמודדות עם מצבי התנגדות ושחיקה." },
+      { name: "context-theme", label: "מה הנושא המרכזי במהלך ההתנסות שלך?", lines: 2, tutorial: "נושא יומי/שבועי, ואיך נושא זה יבוא לידי ביטוי." },
+      { name: "context-env", label: "מה בסביבה עשוי לסייע/לעכב אותך?", lines: 2 },
+      { name: "content-opening", label: "תוכן שיועבר - פתיחה", lines: 2, tutorial: "מלאו במקרה שהתנסות כוללת העברת שיעור" },
+      { name: "time-opening", label: "זמן מוקצה - פתיחה" },
+      { name: "content-body", label: "תוכן שיועבר - גוף", lines: 2 },
+      { name: "time-body", label: "זמן מוקצה - גוף" },
+      { name: "content-end", label: "תוכן שיועבר - סיכום", lines: 2 },
+      { name: "time-end", label: "זמן מוקצה - סיכום" }
+    ]
+  },
+  "alon-plan-instructional": {
+    group: "בה״די - אלון",
+    name: "אישור תוכניות - הדרכתי",
+    color: "green",
+    parameters: [
+      { name: "main-mission", label: "מה היא משימתך העיקרית בהתנסות ואיך תתפוס/תתפסי אותה?", lines: 2 },
+      { name: "main-message", label: "מה המסר המרכזי אותו תרצה/תרצי להעביר במהלך ההתנסות?", lines: 2 },
+      { name: "why", label: "למה לדעתך קיבלת את ההתנסות?", lines: 2 },
+      {
+        name: "targets",
+        label: "יעדים למשימה (3 לפחות)",
+        variadic: true,
+        children: [
+          { name: "target", label: "יעד" },
+          { name: "challenges", label: "אתגרים שאני צופה בעמידה ביעד" },
+          { name: "how-to-handle", label: "איך אתמודד עם האתגרים הצפויים?" },
+          { name: "metrics", label: "מדדים להצלחה" }
+        ]
+      },
+      { name: "target-audience", label: "מי קהל היעד שלך בהתנסות?" },
+      { name: "audience-reaction", label: "איך אתה מצפה/את מצפה שקהל היעד יתנהג ויגיב במהלך ההתנסות?", lines: 2 },
+      { name: "timing", label: "באיזה שבוע המשימה תועבר?", tutorial: "ומדוע לדעתך דווקא בשבוע זה?" },
+      { name: "conditions", label: "באילו תנאים תקיים/תקיימי את ההתנסות, ובאילו עזרים תשתמש/י?", lines: 2 },
+      { name: "content-opening", label: "תוכן שיועבר - פתיחה", lines: 2 },
+      { name: "time-opening", label: "זמן מוקצה - פתיחה" },
+      { name: "content-body", label: "תוכן שיועבר - גוף", lines: 2 },
+      { name: "time-body", label: "זמן מוקצה - גוף" },
+      { name: "content-end", label: "תוכן שיועבר - סיכום", lines: 2 },
+      { name: "time-end", label: "זמן מוקצה - סיכום" }
+    ]
+  },
+  "alon-plan-tour": {
+    group: "בה״די - אלון",
+    name: "אישור תוכניות - סיור",
+    color: "orange",
+    parameters: [
+      { name: "main-mission", label: "כיצד תגדיר/י את משימותיך העיקריות בסיור?", lines: 2, tutorial: "ואילו תחומי אחריות נגזרים מהן!" },
+      { name: "guidelines", label: "למה תצטרך/תצטרכי ותשאף/תשאפי לשים לב במהלך הסיור?", lines: 2 },
+      { name: "main-message", label: "מהו הקו המנחה שילווה את הסיור לאורכו?", lines: 2, tutorial: "מה המסר המרכזי אותו תרצה/תרצי להעביר?" },
+      { name: "why", label: "למה לדעתך קיבלת את ההתנסות?", lines: 2 },
+      {
+        name: "targets",
+        label: "יעדים למשימה (3 לפחות)",
+        variadic: true,
+        children: [
+          { name: "target", label: "יעד" },
+          { name: "challenges", label: "אתגרים שאני צופה בעמידה ביעד" },
+          { name: "how-to-handle", label: "איך אתמודד עם האתגרים הצפויים?" },
+          { name: "metrics", label: "מדדים להצלחה" }
+        ]
+      },
+      { name: "target-audience", label: "מי קהל היעד שלך בהתנסות?" },
+      { name: "audience-reaction", label: "כיצד תצפה/תצפי שקהל היעד יתנהג ויגיב?", lines: 2 },
+      { name: "timing", label: "באיזה שבוע המשימה תועבר?", lines: 2, tutorial: "ומדוע לדעתך דווקא בשבוע זה?" },
+      { name: "conditions", label: "באילו תנאים תקיימו את ההתנסות ובאילו עזרים תשתמשו?", lines: 2 },
+      {
+        name: "stations",
+        label: "שלד הסיור",
+        variadic: true,
+        children: [
+          { name: "stage", label: "השלב בסיור", placeholder: "תחנה 1", tutorial: "השלב הראשון הוא \"הגעה\", והאחרון הוא \"סיכום\"" },
+          { name: "content", label: "התוכן שיועבר", lines: 2 },
+          { name: "time", label: "הזמן המוקצה" },
+          { name: "tools", label: "עזרי הדרכה במידה וקיימים" }
+        ]
+      }
+    ]
+  },
+  "alon-post-experience-debrief": {
+    group: "בה״די - אלון",
+    name: "תחקור לאחר התנסות",
+    color: "cyan",
+    parameters: [
+      { 
+        name: "mission", 
+        label: "סיכום ההתנסות", 
+        lines: 15,
+        tutorial: (
+          <>
+            <p>סכם/י במילים שלך כיצד חווית את ההתנסות תוך התייחסות לשאלות הבאות:</p>
+            <p>1. ציין/י אתגר שהתמודדת איתו בהצלחה - באילו חוזקות השתמשת?</p>
+            <p>2. ציין/י אתגר איתו היית רוצה להתמודד אחרת.</p>
+            <p>3. מה היו היעדים שבחרת לעסוק בהם עם קבלת ההתנסות? האם התמודדת עמם וחיזקת אותם? כיצד?</p>
+            <p>4. ציין/י נקודות חדשות שלמדת על עצמך.</p>
+            <p>5. במידה וההתנסות הייתה פיקודית, מהן הנקודות החדשות שלמדת על המסגרת?</p>
+            <p>6. איך תפיסת הפיקוד שלך באה לידי ביטוי בהתנסות? ומה התחדד בה לאורך ההתנסות?</p>
+            <p>7. פרט/י מה תיקח/י הלאה לתפקידך העתידי כקצין/ה מתוך התנהלותך במהלך ההתנסות.</p>
+          </>
+        )
+      },
+      {
+        name: "learned-1",
+        label: "דגשים למתנסים הבאים",
+        lines: 3,
+        tutorial: "מינימום 3 טיפים לבא/ה אחריך",
+      },
+      {
+        name: "learned-2",
+        label: "הצעות לשיפור ההתנסות",
+        lines: 3,
+      }
+    ]
+  }
 }
 
 const LIBRARY_CODE = `
@@ -2202,13 +2345,13 @@ const LIBRARY_CODE = `
           #set par(spacing: 0.5em, leading: 0.5em)
           #let sender-details-phone-index = sender-details.position("טלפון")
           #box(width: 6cm)[
-            #for l in sender-details.slice(0, sender-details-phone-index).split("\\n") [
+            #for l in sender-details.slice(0, sender-details-phone-index).split("\n") [
               #set text(weight: "bold")
               #l
               #linebreak(justify: true)
             ]
             #if sender-details-phone-index != none [
-              #for l in sender-details.slice(sender-details-phone-index).split("\\n") [
+              #for l in sender-details.slice(sender-details-phone-index).split("\n") [
                 #l
                 #linebreak(justify: true)
               ]
@@ -3119,9 +3262,7 @@ const LIBRARY_CODE = `
 
   *החייל/ת משרת/ת תחת פיקודי* #underline[#months-under-command] חודשים.
 
-  *מידת היכרותי עם החייל/ת:* 
-
-  #multiple(familiarity, ("טובה מאוד", "די טובה", "בינונית", "קלושה"))
+  *מידת היכרותי עם החייל/ת:* #multiple(familiarity, ("טובה מאוד", "די טובה", "בינונית", "קלושה"))
 
   *תפקידו/ה הנוכחי של החייל/ת (פירוט ברמת בלמ״ס בלבד):* #underline[#current-job-title]
 
@@ -3401,6 +3542,224 @@ const LIBRARY_CODE = `
     #point-counter.update(c => c + section.at("points", default: ()).len())
   ]
 ]
+
+#let alon-plan-command(
+  role: "", duration: "",
+  main-mission: "", success: "", tutor-highlights: "",
+  why: "", targets: (),
+  team-state: "", leadership-concept: "", followers-management: "",
+  context-theme: "", context-env: "",
+  content-opening: "", time-opening: "", content-body: "", time-body: "", content-end: "", time-end: "",
+  ..ignored
+) = [
+  + *כללי*
+    + *מה התפקיד #s("שקיבלת", "שקיבלת")?*
+      
+      #role
+    
+    + *מהו משך ההתנסות?*
+      
+      #duration
+
+  + *משימה*
+    + *כיצד #s("אתה מגדיר", "את מגדירה") את משימותיך העיקריות בהתנסות, ואילו תחומי אחריות נגזרים מהן במסגרת התפקיד?*
+      
+      #main-mission
+    
+    + *מה #s("תגדיר", "תגדירי") כהצלחה במשימה?*
+      
+      #success
+    
+    + *על אילו נקודות היית #s("רוצה", "רוצה") שהחונך ישים דגש לאורך ההתנסות, וכן, במשוב בסיום ההתנסות?*
+      
+      #tutor-highlights
+
+  + *מנהיג*
+    + *למה #s("אתה חושב שקיבלת", "את חושבת שקיבלת") את ההתנסות?*
+      
+      #why
+    
+    + *אילו יעדים #s("אתה מציב", "את מציבה") לעצמך במסגרת ההתנסות?*
+      #table(
+        columns: (1fr, 1.5fr, 1.5fr, 1fr),
+        [*יעד*], [*אתגרים שאני צופה בעמידה ביעד*], [*איך אתמודד עם האתגרים הצפויים*], [*מדדים להצלחה*],
+        ..targets.map((t) => (
+          t.at("target", default: ""),
+          t.at("challenges", default: ""),
+          t.at("how-to-handle", default: ""),
+          t.at("metrics", default: "")
+        )).flatten()
+      )
+
+  + *מונהגים*
+    + *מה מצב הצוות/הפלוגה בנקודת זמן זו? מה #s("אתה מצפה", "את מצפה") שיהיה מצב הצוות/הפלוגה בסוף ההתנסות?*
+      
+      #team-state
+    
+    + *כיצד תפיסת הפיקוד שלך תבוא לידי ביטוי במהלך ההתנסות?*
+      
+      #leadership-concept
+    
+    + *איך #s("אתה מתכנן", "את מתכננת") להתנהל מול הפקודים - הנעתם ליעד, התמודדות עם מצבי התנגדות ושחיקה?*
+      
+      #followers-management
+
+  + *הקשר*
+    + *מה הנושא המרכזי במהלך ההתנסות שלך (נושא יומי/שבועי), ואיך נושא זה יבוא לידי ביטוי בהתנסות?*
+      
+      #context-theme
+    
+    + *מה בסביבה עשוי לסייע לך? מה עלול לעכב אותך בהצלחתך?*
+      
+      #context-env
+  
+  #if content-opening != "" or time-opening != "" or content-body != "" or time-body != "" or content-end != "" or time-end != "" [
+    + *שלד השיעור*
+      
+      #table(
+        columns: (1fr, 3fr, 1fr),
+        [*השלב בשיעור*], [*התוכן שיועבר*], [*הזמן המוקצה*],
+        [פתיחה], [#content-opening], [#time-opening],
+        [גוף], [#content-body], [#time-body],
+        [סיכום], [#content-end], [#time-end]
+      )
+  ]
+]
+
+#let alon-plan-instructional(
+  main-mission: "", main-message: "", why: "", targets: (), target-audience: "", audience-reaction: "", timing: "", conditions: "", content-opening: "", time-opening: "", content-body: "", time-body: "", content-end: "", time-end: "", ..ignored
+) = [
+  + *משימה*
+    + *מה היא משימתך העיקרית בהתנסות ואיך #s("אתה תופס", "את תופסת") אותה?*
+      
+      #main-mission
+    + *מה המסר המרכזי אותו #s("תרצה", "תרצי") להעביר במהלך ההתנסות?*
+      
+      #main-message
+  + *מנהיג*
+    + *למה #s("אתה חושב שקיבלת", "את חושבת שקיבלת") את ההתנסות?*
+      
+      #why
+    + *אילו יעדים #s("אתה מציב", "את מציבה") לעצמך במסגרת ההתנסות?*
+      #table(
+        columns: (1fr, 1.5fr, 1.5fr, 1fr),
+        [*יעד*], [*אתגרים שאני צופה בעמידה ביעד*], [*איך אתמודד עם האתגרים הצפויים?*], [*מדדים להצלחה*],
+        ..targets.map((t) => (
+          t.at("target", default: ""),
+          t.at("challenges", default: ""),
+          t.at("how-to-handle", default: ""),
+          t.at("metrics", default: "")
+        )).flatten()
+      )
+  + *מונהגים*
+    + *מי קהל היעד שלך בהתנסות?*
+      
+      #target-audience
+    + *איך #s("אתה מצפה", "את מצפה") שקהל היעד יתנהג ויגיב במהלך ההתנסות?*
+      
+      #audience-reaction
+  + *הקשר*
+    + *באיזה שבוע המשימה תועבר, ומדוע לדעתך דווקא בשבוע זה?*
+      
+      #timing
+    + *באילו תנאים תקיימו את ההתנסות, ובאילו עזרים תשתמשו?*
+      
+      #conditions
+  + *שלד השיעור*
+    
+    #table(
+      columns: (1fr, 3fr, 1fr),
+      [*השלב בשיעור*], [*התוכן שיועבר*], [*הזמן המוקצה*],
+      [פתיחה], [#content-opening], [#time-opening],
+      [גוף], [#content-body], [#time-body],
+      [סיכום], [#content-end], [#time-end],
+    )
+]
+
+#let alon-plan-tour(
+  main-mission: "", guidelines: "", main-message: "", 
+  why: "", targets: (), 
+  target-audience: "", audience-reaction: "", 
+  timing: "", conditions: "", stations: (), 
+  ..ignored
+) = [
+  + *משימה*
+    + *כיצד #s("אתה מגדיר", "את מגדירה") את משימותיך העיקריות בסיור, ואילו תחומי אחריות נגזרים מהן!*
+      
+      #main-mission
+    
+    + *למה #s("תצטרך ותשאף", "תצטרכי ותשאפי") לשים לב במהלך הסיור?*
+      
+      #guidelines
+    
+    + *מהו הקו המנחה שילווה את הסיור לאורכו? מה המסר המרכזי אותו #s("תרצה", "תרצי") להעביר במהלך הסיור?*
+      
+      #main-message
+
+  + *מנהיג*
+    + *למה #s("אתה חושב שקיבלת", "את חושבת שקיבלת") את ההתנסות?*
+      
+      #why
+    
+    + *אילו יעדים #s("אתה מציב", "את מציבה") לעצמך במסגרת ההתנסות?*
+      #table(
+        columns: (1fr, 1.5fr, 1.5fr, 1fr),
+        [*יעד*], [*אתגרים שאני צופה בעמידה ביעד*], [*איך אתמודד עם האתגרים הצפויים*], [*מדדים להצלחה*],
+        ..targets.map((t) => (
+          t.at("target", default: ""),
+          t.at("challenges", default: ""),
+          t.at("how-to-handle", default: ""),
+          t.at("metrics", default: "")
+        )).flatten()
+      )
+
+  + *מונהגים*
+    + *מי קהל היעד שלך בהתנסות?*
+      
+      #target-audience
+    
+    + *כיצד #s("אתה מצפה", "את מצפה") שקהל היעד יתנהג ויגיב במהלך ההתנסות?*
+      
+      #audience-reaction
+
+  + *הקשר*
+    + *באיזה שבוע המשימה תועבר, ומדוע לדעתך דווקא בשבוע זה?*
+      
+      #timing
+    
+    + *באילו תנאים תקיימו את ההתנסות ובאילו עזרים תשתמשו?*
+      
+      #conditions
+
+  + *שלד הסיור*
+    
+    #table(
+      columns: (1fr, 3fr, 1fr, 1.5fr),
+      [*השלב בשיעור*], [*התוכן שיועבר*], [*הזמן המוקצה*], [*עזרי הדרכה במידה וקיימים*],
+      ..stations.map((s) => (
+        s.at("stage", default: ""),
+        s.at("content", default: ""),
+        s.at("time", default: ""),
+        s.at("tools", default: "")
+      )).flatten()
+    )
+]
+
+#let alon-post-experience-debrief(
+  mission: "", learned-1: "", learned-2: "", ..ignored
+) = [
+  + *משימה*
+    + *#s("סכם", "סכמי") במילים שלך כיצד חווית את ההתנסות:*
+      
+      #mission
+  + *הפקת לקחים*
+    + *דגשים למתנסים הבאים*
+      
+      #learned-1
+    + *הצעות לשיפור ההתנסות*
+      
+      #learned-2
+]
 `.trim()
 
 export const compileDocument = async (document: OCDocument) => {
@@ -3421,7 +3780,8 @@ export const compileDocument = async (document: OCDocument) => {
   }
   if (document.date) {
     const date = new Date(document.date)
-    const hebdate = formatJewishDateInHebrew(toJewishDate(date))
+    const hebDateObj = document.afterSunset ? new Date(date.getTime() + 24 * 60 * 60 * 1000) : date
+    const hebdate = formatJewishDateInHebrew(toJewishDate(hebDateObj))
       .replace("חשון", "מרחשוון")
       .split(" ")
     parameters.hebdate = [hebdate[0], "ב" + hebdate[1], hebdate[2]]
@@ -3453,7 +3813,7 @@ export const compileDocument = async (document: OCDocument) => {
   ) => {
     for (const key in parameters) {
       if (typeof parameters[key] === "string") {
-        parameters[key] = parameters[key].replace(/\t/g, "    ")
+        parameters[key] = parameters[key].replace(/\\t/g, "    ")
       }
 
       const p = paramInfos.find((x) => x.name === key)
@@ -3522,14 +3882,28 @@ export const compileDocument = async (document: OCDocument) => {
   const promises: Promise<void>[] = []
   let i = 0
   for (const logo of settings.logos ?? []) {
-    const logoName = `assets/logo-${i}.${logo.split(".").at(-1)}`
-    promises.push(
-      fetch(logo)
-        .then((r) => r.arrayBuffer())
-        .then((v) => compiler.mapShadow("/" + logoName, new Uint8Array(v))),
-    )
+    const uploadedLogo = settings.uploadedLogos?.find(l => l.id === logo)
+    if (uploadedLogo) {
+      const logoName = `assets/${uploadedLogo.id}.${uploadedLogo.extension}`
+      const base64Str = uploadedLogo.data
+      const binaryStr = window.atob(base64Str)
+      const len = binaryStr.length
+      const bytes = new Uint8Array(len)
+      for (let j = 0; j < len; j++) {
+        bytes[j] = binaryStr.charCodeAt(j)
+      }
+      compiler.mapShadow("/" + logoName, bytes)
+      logos.push(logoName)
+    } else {
+      const logoName = `assets/logo-${i}.${logo.split(".").at(-1)}`
+      promises.push(
+        fetch(logo)
+          .then((r) => r.arrayBuffer())
+          .then((v) => compiler.mapShadow("/" + logoName, new Uint8Array(v))),
+      )
+      logos.push(logoName)
+    }
     i++
-    logos.push(logoName)
   }
   await Promise.all(promises)
 
@@ -3568,3 +3942,4 @@ export const compileDocument = async (document: OCDocument) => {
     )
   }
 }
+

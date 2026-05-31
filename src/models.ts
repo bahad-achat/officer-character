@@ -7,6 +7,7 @@ export interface OCDocument {
   title?: string
   secretness?: string
   date?: string
+  afterSunset?: boolean
   to?: string[]
   da?: string[]
   forCivillians?: boolean

@@ -3,6 +3,9 @@ import {
   Alert,
   Anchor,
   Button,
+  Checkbox,
+  Flex,
+  Box,
   Loader,
   Menu,
   Select,
@@ -420,8 +423,17 @@ const DocumentPage = () => {
         </ActionIcon.Group>
       </h2>
       {document.type !== undefined && (
-        <Container withPadding style={{ flexGrow: 1, overflow: "auto" }}>
-          <Select
+        <Flex
+          direction={{ base: "column", lg: "row" }}
+          align={{ base: "center", lg: "flex-start" }}
+          justify={{ base: "flex-start", lg: "center" }}
+          gap="md"
+          w="100%"
+          px={{ base: "sm", lg: 40 }}
+          style={{ flexGrow: 1, overflow: "auto", boxSizing: "border-box" }}
+        >
+          <Container withPadding>
+            <Select
             leftSection={<FontAwesome icon="file-lines" />}
             value={document.type}
             onChange={(v) => updateDocument({ ...document, type: v ?? "work" })}
@@ -456,17 +468,28 @@ const DocumentPage = () => {
             }}
             data={['בלמ"ס', "שמור"]}
           />
-          <DatePickerInput
-            value={document.date ? new Date(document.date) : null}
-            onChange={(date) =>
-              updateDocument({ ...document, date: date?.toISOString() })
-            }
-            mt="xs"
-            label="תאריך"
-            leftSection={<FontAwesome icon="calendar" />}
-            highlightToday
-            clearable
-          />
+          <Flex mt="xs" align="end" gap="sm">
+            <DatePickerInput
+              style={{ flex: 1 }}
+              value={document.date ? new Date(document.date) : null}
+              onChange={(date) =>
+                updateDocument({ ...document, date: date?.toISOString() })
+              }
+              label="תאריך"
+              leftSection={<FontAwesome icon="calendar" />}
+              highlightToday
+              clearable
+            />
+            <Flex h={36} align="center">
+              <Checkbox
+                label="אחרי שקיעה"
+                checked={document.afterSunset ?? false}
+                onChange={(e) =>
+                  updateDocument({ ...document, afterSunset: e.currentTarget.checked })
+                }
+              />
+            </Flex>
+          </Flex>
           <Tooltip label="נמענים לפעולה">
             <TagsInput
               mt="xs"
@@ -578,31 +601,43 @@ const DocumentPage = () => {
               }
             />
           )}
+          </Container>
           {showPreview && (
-            <div style={{ textAlign: "center" }}>
-              <h2 style={{ textAlign: "center" }}>תצוגה מקדימה</h2>
-              {(os === "ios" || os === "undetermined") && (
-                <p style={{ textAlign: "center" }}>
-                  התצוגה המקדימה באייפונים ואייפדים מציגה רק את העמוד הראשון.
-                </p>
-              )}
-              {previewSrc === "" ? (
-                <Loader mt="xs" />
-              ) : (
-                <iframe
-                  src={previewSrc}
-                  style={{
-                    marginTop: 10,
-                    width: "100%",
-                    aspectRatio: "9/16",
-                    border: "none",
-                    borderRadius: 10,
-                  }}
-                />
-              )}
-            </div>
+            <Box
+              flex={1}
+              w={{ base: "100%", lg: "auto" }}
+              style={{
+                maxWidth: 1200,
+                paddingRight: 40,
+                paddingLeft: 40,
+                paddingBottom: 20,
+              }}
+            >
+              <div style={{ textAlign: "center" }}>
+                <h2 style={{ textAlign: "center" }}>תצוגה מקדימה</h2>
+                {(os === "ios" || os === "undetermined") && (
+                  <p style={{ textAlign: "center" }}>
+                    התצוגה המקדימה באייפונים ואייפדים מציגה רק את העמוד הראשון.
+                  </p>
+                )}
+                {previewSrc === "" ? (
+                  <Loader mt="xs" />
+                ) : (
+                  <iframe
+                    src={previewSrc}
+                    style={{
+                      marginTop: 10,
+                      width: "100%",
+                      aspectRatio: "1 / 1.414",
+                      border: "none",
+                      borderRadius: 10,
+                    }}
+                  />
+                )}
+              </div>
+            </Box>
           )}
-        </Container>
+        </Flex>
       )}
     </>
   )

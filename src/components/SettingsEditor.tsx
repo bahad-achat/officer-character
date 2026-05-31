@@ -5,12 +5,16 @@ import {
   Select,
   Button,
   Textarea,
-  TagsInput,
+  MultiSelect,
+  Group,
+  ActionIcon,
+  Modal,
 } from "@mantine/core"
 import { Dropzone } from "@mantine/dropzone"
 import { showSuccessMessage } from "../ui-utilities"
 import FontAwesome from "./FontAwesome"
 import { Settings } from "../pages/SettingsPage"
+import { useState } from "react"
 
 const SettingsEditor = ({
   settings,
@@ -19,8 +23,49 @@ const SettingsEditor = ({
   settings: Settings
   setSettings: (s: Settings) => void
 }) => {
+  const [logoModalOpen, setLogoModalOpen] = useState(false)
+  const [pendingLogoContent, setPendingLogoContent] = useState("")
+  const [pendingLogoExtension, setPendingLogoExtension] = useState("")
+  const [pendingLogoName, setPendingLogoName] = useState("")
+
   return (
     <>
+      <Modal
+        opened={logoModalOpen}
+        onClose={() => setLogoModalOpen(false)}
+        title="העלאת לוגו חדש"
+        centered
+      >
+        <TextInput
+          label="שם הלוגו"
+          placeholder="חיל הרפואה"
+          value={pendingLogoName}
+          onChange={(e) => setPendingLogoName(e.currentTarget.value)}
+          data-autofocus
+        />
+        <Button
+          fullWidth
+          mt="md"
+          disabled={!pendingLogoName.trim()}
+          onClick={() => {
+            const newLogo = {
+              id: "logo-" + Date.now(),
+              name: pendingLogoName.trim(),
+              data: pendingLogoContent,
+              extension: pendingLogoExtension,
+            }
+            
+            setSettings({
+              ...settings,
+              uploadedLogos: [...(settings.uploadedLogos ?? []), newLogo]
+            })
+            showSuccessMessage("הלוגו הועלה בהצלחה!")
+            setLogoModalOpen(false)
+          }}
+        >
+          אישור
+        </Button>
+      </Modal>
       <h3 style={{ marginTop: 10, textAlign: "center" }}>פרטים אישיים</h3>
       <TextInput
         label="שם מלא"
@@ -138,15 +183,76 @@ const SettingsEditor = ({
           setSettings({ ...settings, senderDetails })
         }}
       />
-      <TagsInput
+      <MultiSelect
         mt="xs"
-        label="לוגואים"
+        label="לוגואים נבחרים"
         styles={{ pill: { direction: "ltr" } }}
         leftSection={<FontAwesome icon="icons" />}
-        placeholder="קישורים לתמונות שמשמשות כלוגו"
+        placeholder="בחרו לוגואים"
+        data={[
+          { value: "/logo.png", label: 'בה"ד 1' },
+          { value: "/alon.png", label: "אלון" },
+          { value: "/erez.png", label: "ארז" },
+          ...(settings.uploadedLogos ?? []).map(l => ({ value: l.id, label: l.name }))
+        ]}
         value={settings.logos ?? []}
         onChange={(logos) => setSettings({ ...settings, logos })}
       />
+      <Dropzone
+        mt="xs"
+        accept={["image/png", "image/jpeg"]}
+        style={{ textAlign: "center" }}
+        multiple={false}
+        onDrop={async (files) => {
+          if (files.length === 0) {
+            return
+          }
+
+          const reader = new FileReader()
+          reader.onloadend = () => {
+            const content = reader.result!.toString()
+            setPendingLogoContent(content.split(",")[1])
+            setPendingLogoExtension(files[0].name.split(".").at(-1) ?? "png")
+            setPendingLogoName("")
+            setLogoModalOpen(true)
+          }
+          reader.readAsDataURL(files[0])
+        }}
+      >
+        <p>
+          <FontAwesome
+            icon="upload"
+            props={{ style: { marginInlineEnd: 5 } }}
+          />{" "}
+          גררו לכאן תמונה כדי להעלות לוגו חדש
+        </p>
+      </Dropzone>
+      {(settings.uploadedLogos ?? []).length > 0 && (
+        <div style={{ marginTop: 10 }}>
+          <h4>לוגואים שהועלו:</h4>
+          {(settings.uploadedLogos ?? []).map((logo) => (
+            <Group key={logo.id} mt={5}>
+              <img
+                src={`data:image/${logo.extension};base64,${logo.data}`}
+                style={{ height: 30, width: 30, objectFit: 'contain' }}
+              />
+              <span>{logo.name}</span>
+              <ActionIcon
+                color="red"
+                onClick={() => {
+                  setSettings({
+                    ...settings,
+                    uploadedLogos: settings.uploadedLogos!.filter(l => l.id !== logo.id),
+                    logos: (settings.logos ?? []).filter(l => l !== logo.id)
+                  })
+                }}
+              >
+                <FontAwesome icon="trash" />
+              </ActionIcon>
+            </Group>
+          ))}
+        </div>
+      )}
       <h3 style={{ marginTop: 10, textAlign: "center" }}>עיצוב מסמך</h3>
       <TextInput
         mt="xs"

@@ -23,6 +23,13 @@ import SettingsEditor from "../components/SettingsEditor"
 import version from "../version.json"
 import { offline } from "../config"
 
+export interface CustomLogo {
+  id: string
+  name: string
+  data: string
+  extension: string
+}
+
 export interface Settings {
   rank?: string
   jobTitle?: string
@@ -30,6 +37,7 @@ export interface Settings {
   senderDetails?: string
   fullName?: string
   logos?: string[]
+  uploadedLogos?: CustomLogo[]
   sex?: string
   signatureWidth?: number
   useDavidCLM?: boolean
